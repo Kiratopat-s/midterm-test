@@ -1,2 +1,42 @@
-./data
+# Go binary files
+*.exe
+*.exe~
+*.dll
+*.so
+*.dylib
+*.test
+
+# Build output
+/build
+/bin
+/obj
+/data
+
+# Go modules and vendor directories
+vendor/
+go.sum
+go.mod
+
+# IDE and editor directories
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# OS-specific files
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+
+# Environment files
 .env
+
+# Coverage output
+coverage.out
+
+# Temporary files
+*.tmp
+*.bak
+*.swp
