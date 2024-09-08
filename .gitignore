@@ -40,3 +40,5 @@ coverage.out
 *.tmp
 *.bak
 *.swp
+
+guide.md
