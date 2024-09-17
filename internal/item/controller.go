@@ -82,52 +82,8 @@ func (controller Controller) CreateItem(ctx *gin.Context) {
 	})
 }
 
-// func (Controller Controller) GetAllItems(ctx *gin.Context) {
-// 	// Bind query parameters
-// 	var (
-// 		request model.RequestFindItem
-// 	)
-// 	// Find
-// 	items, err := Controller.Service.Find(request)
-// 	if err != nil {
-// 		ctx.JSON(http.StatusInternalServerError, gin.H{
-// 			"message": err,
-// 		})
-// 		return
-// 	}
-
-// 	ctx.JSON(http.StatusOK, gin.H{
-// 		"data": items,
-// 	})
-// }
 
 func (controller Controller) FindAllItem(ctx *gin.Context) {
-	// // Bind query parameters
-	// var (
-	// 	request model.RequestFindItem
-	// )
-
-	// log.Println(request)
-
-	// if err := ctx.BindQuery(&request); err != nil {
-	// 	ctx.JSON(http.StatusBadRequest, gin.H{
-	// 		"message": err,
-	// 	})
-	// 	return
-	// }
-
-	// // Find
-	// items, err := controller.Service.Find(request)
-	// if err != nil {
-	// 	ctx.JSON(http.StatusInternalServerError, gin.H{
-	// 		"message": err,
-	// 	})
-	// 	return
-	// }
-
-	// ctx.JSON(http.StatusOK, gin.H{
-	// 	"data": items,
-	// })
 
 	
 	items, err := controller.Service.FindAll()
@@ -241,57 +197,3 @@ func (controller Controller) DeleteItem(ctx *gin.Context) {
 
 
 
-// func (controller Controller) CreateItem(ctx *gin.Context) {
-// 	// Bind
-// 	var request model.RequestItem
-
-// 	if err := ctx.Bind(&request); err != nil {
-// 		ctx.JSON(http.StatusBadRequest, gin.H{
-// 			"message": getValidationErrors(err),
-// 		})
-// 		return
-// 	}
-
-// 	// Create item
-// 	item, err := controller.Service.Create(request)
-// 	if err != nil {
-// 		ctx.JSON(http.StatusInternalServerError, gin.H{
-// 			"message": err.Error(),
-// 		})
-// 		return
-// 	}
-
-// 	// Response
-// 	ctx.JSON(http.StatusCreated, gin.H{
-// 		"data": item,
-// 	})
-// }
-
-// func (controller Controller) FindItems(ctx *gin.Context) {
-// 	// Bind query parameters
-// 	var (
-// 		request model.RequestFindItem
-// 	)
-
-// 	if err := ctx.BindQuery(&request); err != nil {
-// 		ctx.JSON(http.StatusBadRequest, gin.H{
-// 			"message": err,
-// 		})
-// 		return
-// 	}
-
-// 	// Find
-// 	items, err := controller.Service.Find(request)
-// 	if err != nil {
-// 		ctx.JSON(http.StatusInternalServerError, gin.H{
-// 			"message": err,
-// 		})
-// 		return
-// 	}
-
-// 	ctx.JSON(http.StatusOK, gin.H{
-// 		"data": items,
-// 	})
-// }
-
-// 
