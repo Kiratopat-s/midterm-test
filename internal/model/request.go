@@ -66,3 +66,12 @@ type ResponseLogin struct {
 type ResponseLogout struct {
     Message string `json:"message"`
 }
+
+type RequestPatchManyItemStatus struct {
+	IDs    []int    `json:"ids" binding:"required"`
+	Status string `json:"status" binding:"required"`
+}
+
+type RequestDeleteManyItems struct {
+    IDs []int `json:"ids" binding:"required"`
+}
