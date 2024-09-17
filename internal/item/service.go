@@ -93,3 +93,11 @@ func (service Service) UpdateStatus(id uint, status constant.ItemStatus) (model.
 func (service Service) Delete(id uint) error {
 	return service.Repository.Delete(id)
 }
+
+func (service Service) UpdateManyStatus(ids []int, status string) error {
+	return service.Repository.UpdateManyStatus(ids, status)
+}
+
+func (service Service) DeleteMany(ids []int) error {
+	return service.Repository.DeleteMany(ids)
+}

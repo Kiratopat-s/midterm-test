@@ -65,3 +65,11 @@ func (repo Repository) Replace(item model.Item) error {
 func (repo Repository) Delete(id uint) error {
 	return repo.Database.Delete(&model.Item{}, id).Error
 }
+
+func (repo Repository) UpdateManyStatus(id []int, status string) error {
+	return repo.Database.Model(&model.Item{}).Where("id IN (?)", id).Update("status", status).Error
+}
+
+func (repo Repository) DeleteMany(id []int) error {
+	return repo.Database.Where("id IN (?)", id).Delete(&model.Item{}).Error
+}

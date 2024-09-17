@@ -197,3 +197,54 @@ func (controller Controller) DeleteItem(ctx *gin.Context) {
 
 
 
+func (controller Controller) UpdateManyItemsStatus(ctx *gin.Context) {
+	// get ids : int[], status: string from body to do next
+	var request model.RequestPatchManyItemStatus
+	if err := ctx.Bind(&request); err != nil {
+		ctx.JSON(http.StatusBadRequest, gin.H{
+			"message": err,
+		})
+		return
+	}
+
+	// Update status
+	err := controller.Service.UpdateManyStatus(request.IDs, request.Status )
+	if err != nil {
+		ctx.JSON(http.StatusInternalServerError, gin.H{
+			"message": err,
+		})
+		return
+	}
+
+	ctx.JSON(http.StatusOK, gin.H{
+		"data": "Updated",
+	})
+}
+
+
+
+func (controller Controller) DeleteManyItems(ctx *gin.Context) {
+	// get ids : int[] from body to do next
+	var request model.RequestDeleteManyItems
+	if err := ctx.Bind(&request); err != nil {
+		ctx.JSON(http.StatusBadRequest, gin.H{
+			"message": err,
+		})
+		return
+	}
+
+	// Delete
+	err := controller.Service.DeleteMany(request.IDs)
+	if err != nil {
+		ctx.JSON(http.StatusInternalServerError, gin.H{
+			"message": err,
+		})
+		return
+	}
+
+	ctx.JSON(http.StatusOK, gin.H{
+		"message": "Deleted",
+	})
+}
+
+
