@@ -42,11 +42,9 @@ func (repo Repository) Find(query model.RequestFindItem) ([]model.Item, error) {
 
 func (repo Repository) FindAll() ([]model.Item, error) {
 	var results []model.Item
-
-	if err := repo.Database.Find(&results).Error; err != nil {
+	if err := repo.Database.Order("id desc").Find(&results).Error; err != nil {
 		return results, err
 	}
-
 	return results, nil
 }
 

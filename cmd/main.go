@@ -46,6 +46,7 @@ func main() {
 		"http://localhost:3000",
 		"http://127.0.0.1:3000",
 	}
+	config.AllowCredentials = true
 	r.Use(cors.New(config))
 
 	r.GET("/version", func(c *gin.Context) {
@@ -80,7 +81,7 @@ func main() {
 	r.DELETE("/items/:id", verifyToken, controller.DeleteItem)
 	r.POST("/login", userController.Login)
 	r.POST("/register", userController.Register)
-	r.POST("/logout", verifyToken, userController.Logout)
+	// r.POST("/logout", verifyToken, userController.Logout)
 
 	// Graceful shutdown setup
 	srv := &http.Server{

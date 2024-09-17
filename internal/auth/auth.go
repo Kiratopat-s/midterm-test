@@ -29,7 +29,7 @@ func CreateToken(uid uint, username string, firstName string, lastName string,po
 		"lastName": lastName,
 		"position": position,
 		"photoLink": photoLink,
-		"exp":      time.Now().Add(time.Hour).Unix(),
+		"exp":      time.Now().Add(time.Minute*30).Unix(),
 	})
 
 	signedToken, err := t.SignedString([]byte(secret))
@@ -41,21 +41,4 @@ func CreateToken(uid uint, username string, firstName string, lastName string,po
 	return signedToken, nil
 }
 
-// func CreateToken(uid  ,username string, secret string) (string, error) {
-// 	t := jwt.NewWithClaims(jwt.SigningMethodHS256, &jwt.RegisteredClaims{
-// 		Audience:  jwt.ClaimStrings{uid,username},
-// 		ExpiresAt: jwt.NewNumericDate(time.Now().Add(time.Hour)),
-// 	})
 
-// 	signedToken, err := t.SignedString([]byte(secret))
-// 	if err != nil {
-// 		log.Println("error signing key")
-// 		return signedToken, err
-// 	}
-// 	fmt.Print("Token || ",signedToken)
-// 	return signedToken, nil
-// }
-
-
-// สอบถามเพิ่มเติมส่วนของ file structure ครับ : ส่วนไหนจะเป็น folder ที่ next จะเข้าใจว่าเป็น server side พวกไฟล์ *.ts ที่เราต้องการเขียนเป็น API ครับ 
-//npm yarn pnpm แนะนำอันไหนดีครับ

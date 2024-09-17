@@ -66,9 +66,9 @@ func (controller Controller) CreateItem(ctx *gin.Context) {
 
 	// Create item
 	// get owner_id from context
-	ownerId := ctx.MustGet("username").(string)
-	ownerIdInt, _ := strconv.Atoi(ownerId)
-	item, err := controller.Service.Create(request, ownerIdInt)
+	ownerIdFloat := ctx.MustGet("uid").(float64)
+	ownerId := int(ownerIdFloat)
+	item, err := controller.Service.Create(request, ownerId)
 	if err != nil {
 		ctx.JSON(http.StatusInternalServerError, gin.H{
 			"message": err.Error(),
@@ -129,6 +129,7 @@ func (controller Controller) FindAllItem(ctx *gin.Context) {
 	// 	"data": items,
 	// })
 
+	
 	items, err := controller.Service.FindAll()
 	if err != nil {
 		ctx.JSON(http.StatusInternalServerError, gin.H{
