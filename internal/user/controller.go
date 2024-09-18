@@ -40,33 +40,13 @@ func (controller Controller) Login(ctx *gin.Context) {
 		return
 	}
 
+	// ctx.SetCookie("token", "Bearer " + token, 60*30, "/", "localhost", false, true)
+
 	ctx.JSON(http.StatusOK, gin.H{
 		"message": "login succeed",
 		"token": "Bearer "+token,
 	})
 }
-
-// func (controller Controller) Logout(ctx *gin.Context) {
-// 	token := ctx.GetHeader("Authorization")
-// 	if token == "" {
-// 		ctx.JSON(http.StatusBadRequest, gin.H{
-// 			"message": "token is required",
-// 		})
-// 		return
-// 	}
-
-// 	err := controller.Service.Logout(token)
-// 	if err != nil {
-// 		ctx.JSON(http.StatusBadRequest, gin.H{
-// 			"message": err.Error(),
-// 		})
-// 		return
-// 	}
-
-// 	ctx.JSON(http.StatusOK, gin.H{
-// 		"message": "logout succeed",
-// 	})
-// }
 
 func (controller Controller) Register(ctx *gin.Context) {
 	var (

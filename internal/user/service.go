@@ -26,7 +26,6 @@ func NewService(db *gorm.DB, secret string) Service {
 
 func (service Service) Login(req model.RequestLogin) (string, error) {
 	
-	// TODO: Check username and password here
 	user, err := service.Repository.FindOneByUsername(req.Username)
 	if err != nil {
 		return "", err
@@ -34,16 +33,8 @@ func (service Service) Login(req model.RequestLogin) (string, error) {
 	if !checkPasswordHash(req.Password, user.Password) {
 		return "", errors.New("invalid password")
 	}
-	// TODO: Create token here
-	// TABLE users (
-	// 	id          SERIAL PRIMARY KEY,
-	// 	username    VARCHAR(255) UNIQUE NOT NULL,
-	// 	password    VARCHAR(255) NOT NULL,
-	// 	position    VARCHAR(100),
-	// 	first_name  VARCHAR(100),
-	// 	last_name   VARCHAR(100),
-	// 	photo_link  TEXT)
 	token, err := auth.CreateToken(user.ID,user.Username,user.FirstName,user.LastName,user.Position,user.PhotoLink)
+	
 	if err != nil {
 		return "", err
 	}
