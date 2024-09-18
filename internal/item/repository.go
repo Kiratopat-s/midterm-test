@@ -83,3 +83,22 @@ func (repo Repository) UpdateManyStatus(id []int, status string) error {
 func (repo Repository) DeleteMany(id []int) error {
 	return repo.Database.Where("id IN (?)", id).Delete(&model.Item{}).Error
 }
+
+func (repo Repository) CountItemsStatusByUser(ownerID int) (map[string]int, error) {
+	var results []struct {
+		Status string
+		Count  int
+	}
+
+	err := repo.Database.Model(&model.Item{}).Select("status, count(*) as count").Where("owner_id = ?", ownerID).Group("status").Scan(&results).Error
+	if err != nil {
+		return nil, err
+	}
+
+	resultMap := make(map[string]int)
+	for _, r := range results {
+		resultMap[r.Status] = r.Count
+	}
+
+	return resultMap, nil
+}

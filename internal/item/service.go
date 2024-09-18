@@ -105,3 +105,6 @@ func (service Service) UpdateManyStatus(ids []int, status string) error {
 func (service Service) DeleteMany(ids []int) error {
 	return service.Repository.DeleteMany(ids)
 }
+func (service Service) CountItemsStatusByUser(ownerID int) (map[string]int, error) {
+	return service.Repository.CountItemsStatusByUser(ownerID)
+}

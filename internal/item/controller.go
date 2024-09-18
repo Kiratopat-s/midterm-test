@@ -258,3 +258,21 @@ func (controller Controller) DeleteManyItems(ctx *gin.Context) {
 }
 
 
+func (controller Controller) CountItemsStatusByUser(ctx *gin.Context) {
+	// get owner_id from context
+	ownerIdFloat := ctx.MustGet("uid").(float64)
+	ownerId := int(ownerIdFloat)
+
+	// Count
+	counts, err := controller.Service.CountItemsStatusByUser(ownerId)
+	if err != nil {
+		ctx.JSON(http.StatusInternalServerError, gin.H{
+			"message": err,
+		})
+		return
+	}
+
+	ctx.JSON(http.StatusOK, gin.H{
+		"data": counts,
+	})
+}
