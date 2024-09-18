@@ -36,6 +36,7 @@ func main() {
 		log.Fatal("JWT_SECRET is not set")
 	}
 	verifyToken := auth.Guard(secret)
+	verifyAdmin := auth.GuardAdmin(secret)
 
 	// Router setup
 	r := gin.Default()
@@ -78,9 +79,10 @@ func main() {
 	r.GET("/items/:id", verifyToken, controller.FindItemByID)
 	r.PUT("/items/:id", verifyToken, controller.UpdateItem)
 	r.PATCH("/items/:id", verifyToken, controller.UpdateItemStatus)
-	r.PATCH("/items/update/status/many", verifyToken, controller.UpdateManyItemsStatus)
+	r.PATCH("/items/update/status/many", verifyAdmin, controller.UpdateManyItemsStatus)
 	r.DELETE("/items/:id", verifyToken, controller.DeleteItem)
 	r.DELETE("/items/delete/many", verifyToken, controller.DeleteManyItems)
+	r.GET("/items/status/count/user", verifyToken, controller.CountItemsStatusByUser)
 	r.POST("/login", userController.Login)
 	r.POST("/register", userController.Register)
 	// r.POST("/logout", verifyToken, userController.Logout)
