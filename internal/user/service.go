@@ -90,7 +90,3 @@ func hashPassword(password string) (string, error) {
 	return string(bytes), err
 }
 
-// func (service Service) Logout(token string) error {
-// 	return auth.DeleteToken(token)
-// }
-
