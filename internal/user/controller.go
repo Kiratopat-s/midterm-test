@@ -40,7 +40,7 @@ func (controller Controller) Login(ctx *gin.Context) {
 		return
 	}
 
-	// ctx.SetCookie("token", "Bearer " + token, 60*30, "/", "localhost", false, true)
+	ctx.SetCookie("token", "Bearer " + token, 60*30, "/", "localhost", false, true)
 
 	ctx.JSON(http.StatusOK, gin.H{
 		"message": "login succeed",
