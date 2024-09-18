@@ -1,6 +1,8 @@
 package item
 
 import (
+	"errors"
+
 	"github.com/Kiratopat-s/workflow/internal/model"
 
 	"gorm.io/gorm"
@@ -51,10 +53,18 @@ func (repo Repository) FindAll() ([]model.Item, error) {
 func (repo Repository) FindByID(id uint) (model.Item, error) {
 	var result model.Item
 
-	if err := repo.Database.First(&result, id).Error; err != nil {
+	// Query the database
+	err := repo.Database.First(&result, id).Error
+	if err != nil {
+		// Return "record not found" error if no record is found
+		if errors.Is(err, gorm.ErrRecordNotFound) {
+			return result, gorm.ErrRecordNotFound
+		}
+		// Return other errors, if any
 		return result, err
 	}
 
+	// Return the found result
 	return result, nil
 }
 

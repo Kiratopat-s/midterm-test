@@ -42,7 +42,11 @@ func (service Service) FindAll() ([]model.Item, error) {
 }
 
 func (service Service) FindByID(id uint) (model.Item, error) {
-	return service.Repository.FindByID(id)
+	item, err := service.Repository.FindByID(id)
+	if err != nil {
+		return item, err
+	}
+	return item, nil
 }
 
 

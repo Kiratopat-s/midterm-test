@@ -103,15 +103,25 @@ func (controller Controller) FindItemByID(ctx *gin.Context) {
 	// Path param
 	id, _ := strconv.Atoi(ctx.Param("id"))
 
-	// Find
+	// Find item
 	item, err := controller.Service.FindByID(uint(id))
 	if err != nil {
+		// Check if the error is because the record was not found
+		if errors.Is(err, gorm.ErrRecordNotFound) {
+			ctx.JSON(http.StatusNotFound, gin.H{
+				"message": "Item not found",
+			})
+			return
+		}
+
+		// Other types of errors (e.g., database issues)
 		ctx.JSON(http.StatusInternalServerError, gin.H{
-			"message": err,
+			"message": "Error finding item: " + err.Error(),
 		})
 		return
 	}
 
+	// Successfully found item
 	ctx.JSON(http.StatusOK, gin.H{
 		"data": item,
 	})
