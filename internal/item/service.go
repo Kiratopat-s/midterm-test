@@ -102,8 +102,13 @@ func (service Service) UpdateManyStatus(ids []int, status string) error {
 	return service.Repository.UpdateManyStatus(ids, status)
 }
 
-func (service Service) DeleteMany(ids []int) error {
+func (service Service) DeleteMany(ids []int, uid int, userPostion string) error {
+	
+	if userPostion == string(constant.Admin) {
 	return service.Repository.DeleteMany(ids)
+	}
+
+	return service.Repository.DeleteManyByUserId(ids, uid)
 }
 func (service Service) CountItemsStatusByUser(ownerID int) (map[string]int, error) {
 	return service.Repository.CountItemsStatusByUser(ownerID)

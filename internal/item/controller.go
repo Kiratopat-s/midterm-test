@@ -243,8 +243,14 @@ func (controller Controller) DeleteManyItems(ctx *gin.Context) {
 		return
 	}
 
+	// get position and uid from context
+	ownerIdFloat := ctx.MustGet("uid").(float64)
+	ownerId := int(ownerIdFloat)
+	userPostion := ctx.MustGet("position").(string)
+
+
 	// Delete
-	err := controller.Service.DeleteMany(request.IDs)
+	err := controller.Service.DeleteMany(request.IDs,ownerId,userPostion)
 	if err != nil {
 		ctx.JSON(http.StatusInternalServerError, gin.H{
 			"message": err,

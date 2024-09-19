@@ -77,11 +77,15 @@ func (repo Repository) Delete(id uint) error {
 }
 
 func (repo Repository) UpdateManyStatus(id []int, status string) error {
-	return repo.Database.Model(&model.Item{}).Where("id IN (?)", id).Update("status", status).Error
+	return repo.Database.Model(&model.Item{}).Where("id IN (?) AND status = ?", id, "PENDING").Update("status", status).Error
 }
 
 func (repo Repository) DeleteMany(id []int) error {
 	return repo.Database.Where("id IN (?)", id).Delete(&model.Item{}).Error
+}
+
+func (repo Repository) DeleteManyByUserId(ids []int, ownerID int) error {
+	return repo.Database.Where("id IN (?) AND owner_id = ?", ids, ownerID).Delete(&model.Item{}).Error
 }
 
 func (repo Repository) CountItemsStatusByUser(ownerID int) (map[string]int, error) {
