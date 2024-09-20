@@ -10,6 +10,9 @@ COPY go.mod go.sum ./
 # Download and cache Go modules
 RUN go mod download
 
+# Install Goose
+RUN go install github.com/pressly/goose/v3/cmd/goose@latest
+
 # Copy the rest of the application code to the working directory
 COPY . .
 
