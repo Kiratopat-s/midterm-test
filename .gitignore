@@ -14,7 +14,6 @@
 
 # Go modules and vendor directories
 vendor/
-go.sum
 go.mod
 
 # IDE and editor directories
