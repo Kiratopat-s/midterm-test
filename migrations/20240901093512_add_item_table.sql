@@ -9,9 +9,9 @@ CREATE TABLE items (
 );
 
 -- insert seed data
-INSERT INTO items (title, amount, quantity, status, owner_id) VALUES ('item1', 100, 10, 'active', 1);
-INSERT INTO items (title, amount, quantity, status, owner_id) VALUES ('item2', 200, 20, 'active', 1);
-INSERT INTO items (title, amount, quantity, status, owner_id) VALUES ('item3', 300, 30, 'active', 1);
+INSERT INTO items (title, amount, quantity, status, owner_id) VALUES ('item1', 100, 10, 'REJECTED', 1);
+INSERT INTO items (title, amount, quantity, status, owner_id) VALUES ('item2', 200, 20, 'APPROVED', 1);
+INSERT INTO items (title, amount, quantity, status, owner_id) VALUES ('item3', 300, 30, 'PENDING', 1);
 
 -- +goose Down
 DROP TABLE items;
